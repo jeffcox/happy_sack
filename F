@@ -16,17 +16,8 @@ else
 fi
 
 # Get the line number and the file name
-# quick check for gsed
-_sedcmd=sed
-if [ $OSTYPE = darwin* ]; then
-    if [ -x gsed ]; then
-        _sedcmd=gsed
-    else
-        echo "fix bsd sed output or install gsed"
-    fi
-fi
 
-_sack_line=`$_sedcmd -n "$1p" < $sack_shortcutfile`
+_sack_line=`sed -n "$1p" < $sack_shortcutfile`
 _lineno=`echo $_sack_line | awk '{ print $1 }'`
 _fname=`echo $_sack_line | awk '{ print $2 }'`
 
