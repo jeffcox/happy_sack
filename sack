@@ -14,7 +14,7 @@
 # @dependencies:
 # - ack (http://betterthangrep.com/)
 # - tee
-# - awk
+# - gawk
 #
 # @version:
 # 1.0
@@ -49,7 +49,7 @@ display_shortcuts() {
     # We could have restored the default look for ack with the --group option, but
     # it turns out that this is actually simpler to parse with --nogroup and then
     # reformat the output to match the --group formats.
-    awk -v f_name="" -F':' '
+    gawk -v f_name="" -F':' '
     BEGIN {x=1};
     {
         if ($1 != f_name) {
@@ -71,7 +71,7 @@ display_shortcuts() {
 # Format: line_number:full_file_path
 process_shorcut_paths() {
     # Using : as the delimiter here should be fine, because : is not used in file names
-    awk -F':' '
+    gawk -F':' '
     {
         gsub(/\[([0-9]{0,2}(;[0-9]{0,2}){0,2})?[m|K]/, "", $0);
         print $2 " " $1;
